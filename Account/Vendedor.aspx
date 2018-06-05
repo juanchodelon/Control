@@ -70,7 +70,7 @@
                     <asp:TextBox runat="server" ID="nuevadescrip" CssClass="form-control" />  
                 </div>
                 <div class="form-group">
-                    <asp:Button Text="modificar" CssClass="btn btn-primary" runat="server"/>
+                    <asp:Button Text="modificar" CssClass="btn btn-primary" runat="server" OnClick="modificar_Click"/>
                 </div>
            </div>
         </div>

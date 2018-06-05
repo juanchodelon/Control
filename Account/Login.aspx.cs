@@ -41,25 +41,18 @@ public partial class Account_Login : System.Web.UI.Page
         {
             for (int i = 0; i < user.Count; i++)
             {
-                if (Password.Text == user[i].Password)
-                    p = true;
-                else
-                    p = false;
-
-                if (UserName.Text == user[i].Nombre)
+                if (Password.Text == user[i].Password && UserName.Text == user[i].Nombre)
+                {
                     n = true;
+                    p = true;
+                    Session["id"] = user[i].Id;
+                    Session["nick"] = user[i].Nombre;
+                    Session["loged"] = 1;
+                    Response.Redirect("~/Account/Vendedor");
+                }
                 else
-                    n = false;
+                    error.Text = "nombre de usuario o clave incorrectas!";
             }
-            if (n == false || p == false)
-                error.Text = "nombre de usuario o clave incorrectas!";
-
-            if (n == true && p == true)
-            {
-                Session["loged"] = 1;
-                Response.Redirect("~/Account/Vendedor");
-            }
-
         }
     }
 }
