@@ -7,7 +7,7 @@
         <div class="row col-sm-10 offset-sm-1">
             <!------Crear producto------>
             <div class="col-sm-5">
-                <strong>vende algo</strong><hr />
+                <strong>Crear producto</strong><hr />
                 <div class="pb-1">
                     <small>nombre del producto</small>
                     <asp:TextBox runat="server" ID="Pname" CssClass="form-control" />  
@@ -41,7 +41,7 @@
                     <asp:TextBox runat="server" ID="descripcion" CssClass="form-control" />  
                 </div>
                 <div class="form-group">
-                     <asp:Button Text="vender" CssClass="btn btn-primary" runat="server"/>
+                     <asp:Button Text="Crear producto" CssClass="btn btn-primary" runat="server" OnClick="Crear_Click"/>
                 </div>
             </div>
             <!------editar un producto------>
