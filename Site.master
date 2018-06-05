@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Control de ventas</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--Para obtener más información sobre cómo agrupar scripts en ScriptManager, consulte http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Scripts de marco--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Scripts del sitio--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <nav class="navbar fixed-top navbar-dark bg-dark">
+            
+            <div class="nav justify-content-end">
+            <ul class="nav">
+              <a class="nav-link navbar-brand" runat="server" href="~/">Store</a>
+              <a class="nav-link text-light" runat="server" href="~/">Inicio</a>
+              <a class="nav-link text-light" runat="server" href="~/Account/About">Acerca de</a>
+            </ul>
+            </div>
+
+
+            <div class="nav justify-content-end">
+                <ul class="nav">
+                  <asp:Hyperlink ID="loginbtn" Text="login" runat="server" CssClass="nav-link text-light" NavigateUrl="~/Account/login" />
+                  <asp:Hyperlink ID="vendedorbtn" Text="Vendedor" runat="server" CssClass="nav-link text-light" NavigateUrl="~/Account/Vendedor"/>
+                    <asp:Hyperlink ID="SuperUser" Text="Admin" runat="server" CssClass="nav-link text-light" NavigateUrl="~/Account/Administrador"/>
+                  <asp:Button Text="cerrar sesion" ID="logoutbtn" CssClass="btn btn-primary" runat="server" OnClick="logoutbtn_Click" />
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container mt-5 pt-5 body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Powered by Juan de Leon</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>

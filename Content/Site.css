@@ -1,0 +1,16 @@
+﻿body {
+    padding: 0;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .jumbotron, {
+        margin-top: 20px;
+    }
+    .card{
+        padding-top: 20px;
+    }
+    .body-content {
+        padding-top: 0px;
+    }
+}
