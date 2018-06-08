@@ -11,6 +11,8 @@ public partial class Account_Login : System.Web.UI.Page
     List<Usuario> user = new List<Usuario>();
     protected void Page_Load(object sender, EventArgs e)
     {
+        //variable global que comprueba si esta logeado o no
+        Session["loged"] = 0;
         /*****lee los datos del archivo de texto y los almacena en una lista*****/
         String filename = Server.MapPath("../App_Data/Users.txt");
         FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);
@@ -30,8 +32,6 @@ public partial class Account_Login : System.Web.UI.Page
 
     protected void Login_Click(object sender, EventArgs e)
     {
-        bool p = false, n = false;
-
         if (Password.Text == "admin" && UserName.Text == "Admin")
         {
             Session["loged"] = 2;
@@ -43,8 +43,6 @@ public partial class Account_Login : System.Web.UI.Page
             {
                 if (Password.Text == user[i].Password && UserName.Text == user[i].Nombre)
                 {
-                    n = true;
-                    p = true;
                     Session["id"] = user[i].Id;
                     Session["nick"] = user[i].Nombre;
                     Session["loged"] = 1;

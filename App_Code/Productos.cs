@@ -19,6 +19,7 @@ public class Productos
     String categoria;
     String descripcion;
     String propietario;
+    int ventas;
 
     public int Id
     {
@@ -108,6 +109,19 @@ public class Productos
         set
         {
             propietario = value;
+        }
+    }
+
+    public int Ventas
+    {
+        get
+        {
+            return ventas;
+        }
+
+        set
+        {
+            ventas = value;
         }
     }
 }

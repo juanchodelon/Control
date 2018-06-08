@@ -7,7 +7,7 @@
         <div class="row col-sm-10 offset-sm-1">
             <!------Crear producto------>
             <div class="col-sm-5">
-                <strong>Crear producto</strong><hr />
+                <h2>Crear producto</h2><hr />
                 <div class="pb-1">
                     <small>nombre del producto</small>
                     <asp:TextBox runat="server" ID="Pname" CssClass="form-control" />  
@@ -46,7 +46,7 @@
             </div>
             <!------editar un producto------>
             <div class="col-sm-5 offset-sm-1">
-                <strong>modifica un produto</strong><hr />
+                <h2>modifica un produto</h2><hr />
                 <div class="pb-1">
                     <small>codigo del produto</small> 
                     <asp:TextBox runat="server" ID="Codigo" CssClass="form-control" /> 
@@ -74,6 +74,7 @@
                 </div>
            </div>
         </div>
+
         <!------muestra la lista de productos en venta------>
         <div class="col-sm-10 offset-sm-1 pt-5">
             <h2>tus productos</h2><hr />
@@ -97,6 +98,50 @@
             <p><strong>Mas pedidos: </strong><asp:Label Text="" CssClass="control-label" ID="Label3" runat="server" /></p>
             <p><strong>Ganancias: </strong><asp:Label Text="" CssClass="control-label" ID="Label4" runat="server" /></p>
         </div>
-    </div>
 
+        <!-------formulario para vender a un cliente------>
+        <div class="col-sm-5 offset-sm-1">
+            <h2>Vende uno de tus productos!</h2><hr />
+            <div class="row pb-1">
+                <div class="col-sm-8">
+                    <small>Nit del cliente</small>
+                    <asp:TextBox runat="server" ID="txtnit" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="col pt-4">
+                    <asp:Button runat="server" Text="verificar NIT" ID="btnverificar" CssClass="btn btn-primary" OnClick="btnverificar_Click"/>
+                </div>
+            </div>
+            
+            <div class="row pb-1">
+                <div class="col">
+                    <small>Codigo del producto</small>
+                    <asp:TextBox runat="server" ID="codigoprod" CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="col">
+                    <small>cantidad a pedir</small>
+                    <asp:TextBox runat="server" ID="cantidad" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                </div>
+            </div>
+            
+            <div class="pb-3">
+                <small>cantidad con que va a pagar</small>
+                <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                <small><asp:Label runat="server" ID="succes" CssClass="text-success">cambio: </asp:Label></small>
+            </div>
+
+            <div class="pb-3">
+                <asp:Button runat="server" Text="comprar producto" ID="comprar" CssClass="btn btn-primary"/>
+            </div>
+        </div>
+        
+        <!-----verificacion del producto------>
+        <div class="col-sm-5 offset-sm-1">
+            <p><asp:Label runat="server" ID="txnit"></asp:Label></p>
+            <p><asp:Label runat="server" ID="txtnombre"></asp:Label></p>
+            <p><asp:Label runat="server" ID="txttelefono"></asp:Label></p>
+            <p><asp:Label runat="server" ID="txterror" CssClass="text-danger"></asp:Label></p>
+            <p><asp:Label runat="server" ID="txtsucces" CssClass="text-success"></asp:Label></p>
+        </div>
+
+    </div>
 </asp:Content>

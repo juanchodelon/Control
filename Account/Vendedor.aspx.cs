@@ -8,7 +8,10 @@ using System.IO;
 
 public partial class Account_Vendedor : System.Web.UI.Page
 {
+    List<Productos> mios = new List<Productos>();
     List<Productos> producto = new List<Productos>();
+    List<Cliente> cliente = new List<Cliente>();
+
     Random rnd = new Random();
     int idprop = 0;
     string nick = "";
@@ -35,9 +38,47 @@ public partial class Account_Vendedor : System.Web.UI.Page
             ptemp.Categoria = reader.ReadLine();
             ptemp.Descripcion = reader.ReadLine();
             ptemp.Propietario = reader.ReadLine();
+            ptemp.Ventas = Convert.ToInt32(reader.ReadLine());
             producto.Add(ptemp);
         }
         reader.Close();
+
+        /******lee el archivo de texto de los clientes******/
+        String cname = Server.MapPath("../App_Data/Clientes.txt");
+        FileStream cstream = new FileStream(cname, FileMode.Open, FileAccess.Read);
+        StreamReader creader = new StreamReader(cstream);
+
+        while (creader.Peek() > -1)
+        {
+            Cliente ctemp = new Cliente();
+            ctemp.Nit = Convert.ToInt32(creader.ReadLine());
+            ctemp.Nombre = creader.ReadLine();
+            ctemp.Numerotelefono = Convert.ToInt32(creader.ReadLine());
+            ctemp.Compras = Convert.ToInt32(creader.ReadLine());
+            cliente.Add(ctemp);
+        }
+        reader.Close();
+
+        /***muestra solamente los productos publicados por el usuario***/
+        /***no por los demas usuarios***/
+        for (int i = 0; i < producto.Count; i++)
+        {
+            if (name.Text == producto[i].Propietario)
+            {
+                Productos mio = new Productos();
+                mio.Id = producto[i].Id;
+                mio.Nombre = producto[i].Nombre;
+                mio.Categoria = producto[i].Categoria;
+                mio.Descripcion = producto[i].Descripcion;
+                mio.Precio = producto[i].Precio;
+                mio.Existencias = producto[i].Existencias;
+                mio.Ventas = producto[i].Ventas;
+                mio.Propietario = "yo";
+                mios.Add(mio);
+            }
+        }
+        pgrid.DataSource = mios;
+        pgrid.DataBind();
 
     }
 
@@ -94,5 +135,28 @@ public partial class Account_Vendedor : System.Web.UI.Page
         writer.Close();
         /****refrescar****/
         Response.Redirect("~/Account/Vendedor");
+    }
+
+    protected void btnverificar_Click(object sender, EventArgs e)
+    {
+        int nit = Convert.ToInt32(txtnit.Text);
+        bool find = false;
+        for (int i = 0; i < cliente.Count; i++)
+        {
+            if (nit == cliente[i].Nit)
+            {
+                txnit.Text = Convert.ToString(cliente[i].Nit);
+                txtnombre.Text = cliente[i].Nombre;
+                txttelefono.Text = Convert.ToString(cliente[i].Nit);
+                txtsucces.Text = "cliente encontrado";
+                find = true;
+            }
+            else
+                find = false;
+        }
+        if (find == false)
+        {
+            txterror.Text = "el cliente no existe";
+        }
     }
 }

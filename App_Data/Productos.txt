@@ -5,6 +5,7 @@ telefono
 hobbies-arte-musica
 es un smartphone
 juan
+0
 783
 piedras
 14
@@ -12,3 +13,4 @@ piedras
 moda
 its a rock
 juan
+0
