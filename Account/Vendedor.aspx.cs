@@ -43,22 +43,6 @@ public partial class Account_Vendedor : System.Web.UI.Page
         }
         reader.Close();
 
-        /******lee el archivo de texto de los clientes******/
-        String cname = Server.MapPath("../App_Data/Clientes.txt");
-        FileStream cstream = new FileStream(cname, FileMode.Open, FileAccess.Read);
-        StreamReader creader = new StreamReader(cstream);
-
-        while (creader.Peek() > -1)
-        {
-            Cliente ctemp = new Cliente();
-            ctemp.Nit = Convert.ToInt32(creader.ReadLine());
-            ctemp.Nombre = creader.ReadLine();
-            ctemp.Numerotelefono = Convert.ToInt32(creader.ReadLine());
-            ctemp.Compras = Convert.ToInt32(creader.ReadLine());
-            cliente.Add(ctemp);
-        }
-        reader.Close();
-
         /***muestra solamente los productos publicados por el usuario***/
         /***no por los demas usuarios***/
         for (int i = 0; i < producto.Count; i++)
@@ -139,6 +123,22 @@ public partial class Account_Vendedor : System.Web.UI.Page
 
     protected void btnverificar_Click(object sender, EventArgs e)
     {
+        /******lee el archivo de texto de los clientes*****/
+        String cname = Server.MapPath("../App_Data/Clientes.txt");
+        FileStream cstream = new FileStream(cname, FileMode.Open, FileAccess.Read);
+        StreamReader creader = new StreamReader(cstream);
+
+        while (creader.Peek() > -1)
+        {
+            Cliente ctemp = new Cliente();
+            ctemp.Nit = Convert.ToInt32(creader.ReadLine());
+            ctemp.Nombre = creader.ReadLine();
+            ctemp.Numerotelefono = Convert.ToInt32(creader.ReadLine());
+            ctemp.Compras = Convert.ToInt32(creader.ReadLine());
+            cliente.Add(ctemp);
+        }
+        creader.Close();
+
         int nit = Convert.ToInt32(txtnit.Text);
         bool find = false;
         for (int i = 0; i < cliente.Count; i++)
@@ -147,7 +147,7 @@ public partial class Account_Vendedor : System.Web.UI.Page
             {
                 txnit.Text = Convert.ToString(cliente[i].Nit);
                 txtnombre.Text = cliente[i].Nombre;
-                txttelefono.Text = Convert.ToString(cliente[i].Nit);
+                txttelefono.Text = Convert.ToString(cliente[i].Numerotelefono);
                 txtsucces.Text = "cliente encontrado";
                 find = true;
             }
@@ -158,5 +158,32 @@ public partial class Account_Vendedor : System.Web.UI.Page
         {
             txterror.Text = "el cliente no existe";
         }
+    }
+
+    protected void comprar_Click(object sender, EventArgs e)
+    {
+        /******escribe el archivo de texto para un cliente*****
+        String filename = Server.MapPath("../App_Data/Productos.txt");
+        FileStream stream = new FileStream(filename, FileMode.Append, FileAccess.Write);
+        StreamWriter writer = new StreamWriter(stream);
+
+        writer.WriteLine(cnombre.Text);
+        writer.WriteLine(cnit.Text);
+        writer.WriteLine(ctelefono.Text);
+        writer.Close();*/
+    }
+
+    protected void BtnaddCliente_Click(object sender, EventArgs e)
+    {
+        /******escribe el archivo de texto para un cliente******/
+        String cname = Server.MapPath("../App_Data/Clientes.txt");
+        FileStream cstream = new FileStream(cname, FileMode.Append, FileAccess.Write);
+        StreamWriter cwriter = new StreamWriter(cstream);
+
+        cwriter.WriteLine(cnombre.Text);
+        cwriter.WriteLine(cnit.Text);
+        cwriter.WriteLine(ctelefono.Text);
+        cwriter.WriteLine("0");
+        cwriter.Close();
     }
 }

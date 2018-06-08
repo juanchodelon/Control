@@ -133,9 +133,31 @@
                 <asp:Button runat="server" Text="comprar producto" ID="comprar" CssClass="btn btn-primary"/>
             </div>
         </div>
+
+        <!----formulario para agregar clientes---->
+            <div class="col-sm-4 offset-sm-1 border border-primary">
+                <h2 class="pt-3">Crear cliente</h2><hr />
+                <div class="pb-1">
+                    <small>nombre del Cliente</small>
+                    <asp:TextBox runat="server" ID="cnombre" CssClass="form-control" />  
+                </div>
+                <div class="pb-1">
+                    <small>NIT</small>
+                    <asp:TextBox runat="server" ID="cnit" CssClass="form-control" />  
+                </div>
+                <div class="pb-4">
+                    <small>Telefono</small>
+                    <asp:TextBox runat="server" ID="ctelefono" CssClass="form-control" />  
+                </div>
+                <div class="pb-4">
+                    <asp:Button runat="server" Text="Crear cliente" ID="BtnaddCliente" CssClass="btn btn-primary" OnClick="BtnaddCliente_Click"/>
+                </div>
+            </div>
+
         
-        <!-----verificacion del producto------>
-        <div class="col-sm-5 offset-sm-1">
+        
+        <!-----verificacion del cliente------>
+        <div class="col-sm-5 offset-sm-1 ">
             <p><asp:Label runat="server" ID="txnit"></asp:Label></p>
             <p><asp:Label runat="server" ID="txtnombre"></asp:Label></p>
             <p><asp:Label runat="server" ID="txttelefono"></asp:Label></p>
