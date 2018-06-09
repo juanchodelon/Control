@@ -125,12 +125,22 @@
             
             <div class="pb-3">
                 <small>cantidad con que va a pagar</small>
-                <asp:TextBox runat="server" ID="TextBox1" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                <small><asp:Label runat="server" ID="succes" CssClass="text-success">cambio: </asp:Label></small>
+                <asp:TextBox runat="server" ID="txtpago" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                <small><asp:Label runat="server" ID="succesvuelto" CssClass="text-success">cambio: </asp:Label></small>
             </div>
-
+            <div class="pb-1">
+                <small>cajero que atiende</small>
+                <asp:DropDownList ID="cajeros" CssClass="form-control" runat="server">
+                    <asp:ListItem>Selecciona una categoria</asp:ListItem>
+                    <asp:ListItem>Marco</asp:ListItem>
+                    <asp:ListItem>Luis</asp:ListItem>
+                    <asp:ListItem>Pamela</asp:ListItem>
+                    <asp:ListItem>Vinicio</asp:ListItem>
+                    <asp:ListItem>Helen</asp:ListItem>
+                </asp:DropDownList>
+            </div>
             <div class="pb-3">
-                <asp:Button runat="server" Text="comprar producto" ID="comprar" CssClass="btn btn-primary"/>
+                <asp:Button runat="server" Text="comprar producto" ID="comprar" CssClass="btn btn-primary" OnClick="comprar_Click1"/>
             </div>
         </div>
 
@@ -154,8 +164,6 @@
                 </div>
             </div>
 
-        
-        
         <!-----verificacion del cliente------>
         <div class="col-sm-5 offset-sm-1 ">
             <p><asp:Label runat="server" ID="txnit"></asp:Label></p>

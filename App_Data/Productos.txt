@@ -1,16 +1,7 @@
-755
-telefono
-1200
-2
+203
+rocas
+12
+5
 hobbies-arte-musica
-es un smartphone
-juan
-0
-783
-piedras
-14
-6
-moda
 its a rock
 juan
-0
