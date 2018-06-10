@@ -18,7 +18,6 @@ public class Productos
     int existencias;
     String categoria;
     String descripcion;
-    String propietario;
     int ventas;
 
     public int Id
@@ -98,19 +97,7 @@ public class Productos
             descripcion = value;
         }
     }
-
-    public string Propietario
-    {
-        get
-        {
-            return propietario;
-        }
-
-        set
-        {
-            propietario = value;
-        }
-    }
+   
 
     public int Ventas
     {

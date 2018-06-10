@@ -8,7 +8,6 @@ using System.IO;
 
 public partial class Account_Vendedor : System.Web.UI.Page
 {
-    List<Productos> mios = new List<Productos>();
     List<Productos> producto = new List<Productos>();
     List<Cliente> cliente = new List<Cliente>();
 
@@ -20,8 +19,7 @@ public partial class Account_Vendedor : System.Web.UI.Page
     {
         int id = Convert.ToInt32(Session["id"]);
         nick = Convert.ToString(Session["nick"]);
-        name.Text = Convert.ToString(nick);
-        correo.Text = Convert.ToString(id);
+        hi.Text = "Hola " + nick;
 
         /******lee el archivo de texto de los clientes*****/
         String cname = Server.MapPath("../App_Data/Clientes.txt");
@@ -53,90 +51,10 @@ public partial class Account_Vendedor : System.Web.UI.Page
             ptemp.Existencias = Convert.ToInt32(reader1.ReadLine());
             ptemp.Categoria = reader1.ReadLine();
             ptemp.Descripcion = reader1.ReadLine();
-            ptemp.Propietario = reader1.ReadLine();
             ptemp.Ventas = Convert.ToInt32(reader1.ReadLine());
             producto.Add(ptemp);
         }
         reader1.Close();
-
-        /***muestra solamente los productos publicados por el usuario***/
-        /***no por los demas usuarios***/
-        for (int i = 0; i < producto.Count; i++)
-        {
-            if (name.Text == producto[i].Propietario)
-            {
-                Productos mio = new Productos();
-                mio.Id = producto[i].Id;
-                mio.Nombre = producto[i].Nombre;
-                mio.Precio = producto[i].Precio;
-                mio.Existencias = producto[i].Existencias;
-                mio.Categoria = producto[i].Categoria;
-                mio.Descripcion = producto[i].Descripcion;
-                mio.Propietario = "yo";
-                mio.Ventas = producto[i].Ventas;
-                mios.Add(mio);
-            }
-        }
-        pgrid.DataSource = mios;
-        pgrid.DataBind();
-
-    }
-
-    protected void Crear_Click(object sender, EventArgs e)
-    {
-        /******escribe el archivo de texto******/
-        String filename = Server.MapPath("../App_Data/Productos.txt");
-        FileStream stream = new FileStream(filename, FileMode.Append, FileAccess.Write);
-        StreamWriter writer = new StreamWriter(stream);
-
-        int id = rnd.Next(100,999);
-
-        writer.WriteLine(id);
-        writer.WriteLine(Pname.Text);
-        writer.WriteLine(precio.Text);
-        writer.WriteLine(existencias.Text);
-        writer.WriteLine(category.Text);
-        writer.WriteLine(descripcion.Text);
-        writer.WriteLine(nick);
-        writer.WriteLine("0");
-        writer.Close();
-
-    }
-
-    protected void modificar_Click(object sender, EventArgs e)
-    {
-        /******escribe el archivo de texto******/
-        String filename = Server.MapPath("../App_Data/Productos.txt");
-        FileStream stream = new FileStream(filename, FileMode.Truncate, FileAccess.Write);
-        StreamWriter writer = new StreamWriter(stream);
-
-        int codigo = Convert.ToInt32(Codigo.Text);
-
-        for (int i = 0; i < producto.Count; i++)
-        {
-            if (codigo == producto[i].Id)
-            {
-                producto[i].Nombre = nuevonombre.Text;
-                producto[i].Descripcion = nuevadescrip.Text;
-                producto[i].Existencias = Convert.ToInt32(nuevoexist.Text);
-                producto[i].Precio = Convert.ToInt32(nuevoprecio.Text);
-            }
-        }
-
-        for (int a = 0; a < producto.Count; a++)
-        {
-            writer.WriteLine(producto[a].Id);
-            writer.WriteLine(producto[a].Nombre);
-            writer.WriteLine(producto[a].Precio);
-            writer.WriteLine(producto[a].Existencias);
-            writer.WriteLine(producto[a].Categoria);
-            writer.WriteLine(producto[a].Descripcion);
-            writer.WriteLine(producto[a].Propietario);
-            writer.WriteLine(producto[a].Ventas);
-        }
-        writer.Close();
-        /****refrescar****/
-        Response.Redirect("~/Account/Vendedor");
     }
 
     protected void btnverificar_Click(object sender, EventArgs e)
@@ -184,6 +102,7 @@ public partial class Account_Vendedor : System.Web.UI.Page
         int pago = Convert.ToInt32(txtpago.Text);
         int nitcliente = Convert.ToInt32(txtnit.Text);
         int total = 0, vuelto;
+        DateTime date = DateTime.Now;
 
         for (int i = 0; i < producto.Count; i++)
         {
@@ -209,7 +128,8 @@ public partial class Account_Vendedor : System.Web.UI.Page
             cwriter.WriteLine(txtnit.Text);
             cwriter.WriteLine(cantidad.Text);
             cwriter.WriteLine(total);
-            cwriter.WriteLine(cajeros.Text);
+            cwriter.WriteLine(nick);
+            cwriter.WriteLine(date);
             cwriter.Close();
 
             //cambia el numero de compras
@@ -243,8 +163,8 @@ public partial class Account_Vendedor : System.Web.UI.Page
             {
                 if (codigo == producto[i].Id)
                 {
-                    producto[i].Existencias -= 1;
-                    producto[i].Existencias += 1;
+                    producto[i].Existencias -= cant;
+                    producto[i].Ventas += cant;
                 }
             }
 
@@ -256,13 +176,10 @@ public partial class Account_Vendedor : System.Web.UI.Page
                 writer.WriteLine(producto[a].Existencias);
                 writer.WriteLine(producto[a].Categoria);
                 writer.WriteLine(producto[a].Descripcion);
-                writer.WriteLine(producto[a].Propietario);
                 writer.WriteLine(producto[a].Ventas);
             }
             writer.Close();
             
-        /****refrescar****/
-        Response.Redirect("~/Account/Vendedor");
         }
     }
 }

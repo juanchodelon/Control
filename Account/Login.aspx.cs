@@ -13,6 +13,7 @@ public partial class Account_Login : System.Web.UI.Page
     {
         //variable global que comprueba si esta logeado o no
         Session["loged"] = 0;
+
         /*****lee los datos del archivo de texto y los almacena en una lista*****/
         String filename = Server.MapPath("../App_Data/Users.txt");
         FileStream stream = new FileStream(filename, FileMode.Open, FileAccess.Read);

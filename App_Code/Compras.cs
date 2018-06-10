@@ -16,6 +16,7 @@ public class Compras
     int cantidad;
     int pago;
     String cajero;
+    DateTime fecha;
 
     public int Codigoprod
     {
@@ -79,6 +80,19 @@ public class Compras
         set
         {
             cajero = value;
+        }
+    }
+
+    public DateTime Fecha
+    {
+        get
+        {
+            return fecha;
+        }
+
+        set
+        {
+            fecha = value;
         }
     }
 }
